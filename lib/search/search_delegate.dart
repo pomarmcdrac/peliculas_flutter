@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 class MovieSearchDelegate extends SearchDelegate{
 
+
   @override
   // TODO: implement searchFieldLabel
   String get searchFieldLabel => 'Buscar película';
@@ -36,16 +37,10 @@ class MovieSearchDelegate extends SearchDelegate{
   @override
   Widget buildResults(BuildContext context) {
     
-    return Text('buildResults');
+    Widget result = _getResults(context);
 
-  }
+    return result;
 
-  Widget _emptyContainer() {
-    return Container(
-        child: Center(
-          child: Icon( Icons.movie_creation_outlined, color: Colors.black38, size: 150,),
-        ),
-      );
   }
 
   @override
@@ -55,10 +50,25 @@ class MovieSearchDelegate extends SearchDelegate{
       return _emptyContainer();
     }
     
-    final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
+    Widget result = _getResults(context);
 
-    return FutureBuilder(
-      future: moviesProvider.searchMovie(query),
+    return result;
+
+  }
+  Widget _emptyContainer() {
+    return Container(
+        child: Center(
+          child: Icon( Icons.movie_creation_outlined, color: Colors.black38, size: 150,),
+        ),
+      );
+  }
+  Widget _getResults(BuildContext context) {
+
+    final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
+    moviesProvider.getsuggestionsByQuery( query );
+
+    return StreamBuilder(
+      stream: moviesProvider.suggestionStream,
       builder: ( _, AsyncSnapshot<List<Movie>> snapshot) {
 
         if( !snapshot.hasData ) return _emptyContainer();
@@ -71,8 +81,8 @@ class MovieSearchDelegate extends SearchDelegate{
         );
       },
     );
-
   }
+
 
 }
 

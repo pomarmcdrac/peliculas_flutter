@@ -6,9 +6,9 @@ import 'package:provider/provider.dart';
 
 class CastingCards extends StatelessWidget {
 
-   final int movieId;
+  final int movieId;
 
-  const CastingCards( this.movieId );
+  CastingCards( this.movieId );
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +20,7 @@ class CastingCards extends StatelessWidget {
       builder: ( _, AsyncSnapshot<List<Cast>> snapshot) {
         
         if( !snapshot.hasData ) {
+          
           return Container(
             constraints: BoxConstraints(maxWidth: 150),
             height: 180,
