@@ -9,7 +9,6 @@ class MovieSearchDelegate extends SearchDelegate{
 
 
   @override
-  // TODO: implement searchFieldLabel
   String get searchFieldLabel => 'Buscar película';
 
   @override
@@ -17,7 +16,7 @@ class MovieSearchDelegate extends SearchDelegate{
     return [
       IconButton(
         onPressed: () => query = '', 
-        icon: Icon( Icons.clear)
+        icon: const Icon( Icons.clear)
       ),
     ];
   }
@@ -29,7 +28,7 @@ class MovieSearchDelegate extends SearchDelegate{
       onPressed: () {
         close(context, null);
       }, 
-      icon: Icon( Icons.arrow_back ),
+      icon: const Icon( Icons.arrow_back ),
     );
 
   }
@@ -56,11 +55,9 @@ class MovieSearchDelegate extends SearchDelegate{
 
   }
   Widget _emptyContainer() {
-    return Container(
-        child: Center(
-          child: Icon( Icons.movie_creation_outlined, color: Colors.black38, size: 150,),
-        ),
-      );
+    return const Center(
+      child: Icon( Icons.movie_creation_outlined, color: Colors.black38, size: 150,),
+    );
   }
   Widget _getResults(BuildContext context) {
 
@@ -101,7 +98,7 @@ class _MovieItem extends StatelessWidget {
       leading: Hero(
         tag: movie.heroId!,
         child: FadeInImage(
-          placeholder: AssetImage('assets/no-image.jpg'),
+          placeholder: const AssetImage('assets/no-image.jpg'),
           image: NetworkImage(movie.fullPosterImg),
           width: 50,
           fit: BoxFit.contain,

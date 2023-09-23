@@ -3,6 +3,8 @@ import 'package:peliculas/models/models.dart';
 import 'package:peliculas/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
+  const DetailsScreen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +51,12 @@ class _CustomAppBar extends StatelessWidget {
           color: Colors.black12,
           child: Text(
             movie.title,
-            style: TextStyle( fontSize:  16 ),
+            style: const TextStyle( fontSize:  16 ),
             textAlign: TextAlign.center,
           ),
         ),
         background: FadeInImage(
-          placeholder: AssetImage('assets/loading.gif'), 
+          placeholder: const AssetImage('assets/loading.gif'), 
           image: NetworkImage(movie.fullBackdropPath),
           fit: BoxFit.cover,
         ),
@@ -85,7 +87,7 @@ class _PosterAndTitle extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
-                placeholder: AssetImage('assets/no-image.jpg'),
+                placeholder: const AssetImage('assets/no-image.jpg'),
                 image: NetworkImage( movie.fullPosterImg ),
                 height: 150,
           
@@ -102,15 +104,15 @@ class _PosterAndTitle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 
-                Text( movie.title, style: textTheme.headline5, overflow: TextOverflow.ellipsis, maxLines: 2 ),
+                Text( movie.title, style: textTheme.headlineSmall, overflow: TextOverflow.ellipsis, maxLines: 2 ),
                 
-                Text( movie.originalTitle, style: textTheme.subtitle1, overflow: TextOverflow.ellipsis, maxLines: 2 ),
+                Text( movie.originalTitle, style: textTheme.titleMedium, overflow: TextOverflow.ellipsis, maxLines: 2 ),
           
                 Row(
                   children: [
                     const Icon( Icons.star, size: 15, color: Colors.blue),
                     const SizedBox( width: 5 ),
-                    Text('${movie.voteAverage}', style: textTheme.caption )
+                    Text('${movie.voteAverage}', style: textTheme.bodySmall )
                   ],
                 )
               ],
@@ -135,7 +137,7 @@ class _Overview extends StatelessWidget {
       child: Text(
         movie.overview,
         textAlign: TextAlign.justify,
-        style: Theme.of(context).textTheme.subtitle1,
+        style: Theme.of(context).textTheme.titleMedium,
         ),
     );
   }

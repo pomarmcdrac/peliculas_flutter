@@ -20,7 +20,7 @@ class MovieSlider extends StatefulWidget {
 
 class _MovieSliderState extends State<MovieSlider> {
 
-  final ScrollController scrollController = new ScrollController();
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -37,24 +37,21 @@ class _MovieSliderState extends State<MovieSlider> {
   }
   @override
   void dispose() {
-    // TODO: implement dispose
-
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 260,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if ( this.widget.title != null )
+          if ( widget.title != null )
             Padding(
               padding: const EdgeInsets.symmetric( horizontal: 20 ),
-              child: Text( this.widget.title! , style: const TextStyle( fontSize: 20, fontWeight: FontWeight.bold ),),
+              child: Text( widget.title! , style: const TextStyle( fontSize: 20, fontWeight: FontWeight.bold ),),
             ),
 
           const SizedBox( height: 5, ),
@@ -82,12 +79,11 @@ class _MoviePoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final unikey = movie.heroId = UniqueKey().toString();
 
     return Container(
       width: 130,
       height: 190,
-      margin: EdgeInsets.symmetric( horizontal: 10 ),
+      margin: const EdgeInsets.symmetric( horizontal: 10 ),
       child: Column(
         children: [
           GestureDetector(
@@ -97,7 +93,7 @@ class _MoviePoster extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: FadeInImage(
-                  placeholder: AssetImage('assets/no-image.jpg'), 
+                  placeholder: const AssetImage('assets/no-image.jpg'), 
                   image: NetworkImage( movie.fullPosterImg ),
                   width: 130,
                   height: 190,

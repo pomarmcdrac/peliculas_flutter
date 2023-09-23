@@ -16,7 +16,7 @@ class AppState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => MoviesProvider(), lazy: false),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     );
   }
 }
@@ -31,11 +31,11 @@ class MyApp extends StatelessWidget {
       title: 'Películas',
       initialRoute: 'home',
       routes: {
-        'home': ( _ ) => HomeScreen(),
-        'details': ( _ ) => DetailsScreen(),
+        'home': ( _ ) => const HomeScreen(),
+        'details': ( _ ) => const DetailsScreen(),
       },
       theme: ThemeData.light().copyWith(
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           color: Colors.cyan,
         )
       ),

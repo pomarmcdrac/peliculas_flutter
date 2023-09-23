@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:peliculas/helpers/debouncer.dart';
-import 'package:peliculas/models/popular_response.dart';
 import 'package:peliculas/models/search_response.dart';
 
 import '../models/models.dart';
@@ -22,18 +20,17 @@ class MoviesProvider extends ChangeNotifier {
   int _popularPage = 0;
 
   final debouncer = Debouncer(
-    duration: Duration( milliseconds: 500 ),
+    duration: const Duration( milliseconds: 500 ),
   );
 
-  final StreamController<List<Movie>> _suggestionStreamController = new StreamController.broadcast();
-  Stream<List<Movie>> get suggestionStream => this._suggestionStreamController.stream;
+  final StreamController<List<Movie>> _suggestionStreamController = StreamController.broadcast();
+  Stream<List<Movie>> get suggestionStream => _suggestionStreamController.stream;
 
 
   MoviesProvider() {
-    print('MoviesProvider inicializado');
 
-    this.getOnDisplayMovies();
-    this.getPopularMovies();
+    getOnDisplayMovies();
+    getPopularMovies();
   }
 
   Future <String> _getJsonData( String endpoint, [int page = 1] ) async {
@@ -48,7 +45,7 @@ class MoviesProvider extends ChangeNotifier {
 
   getOnDisplayMovies() async {
   
-    final jsonData = await this._getJsonData('3/movie/popular');
+    final jsonData = await _getJsonData('3/movie/popular');
     final nowPlayingResponse = NowPlayingResponse.fromJson(jsonData);
 
     onDisplayMovies = nowPlayingResponse.results;
@@ -61,7 +58,7 @@ class MoviesProvider extends ChangeNotifier {
 
     _popularPage++;
 
-    final jsonData = await this._getJsonData('3/movie/popular', _popularPage);
+    final jsonData = await _getJsonData('3/movie/popular', _popularPage);
     final popularResponse = PopularResponse.fromJson(jsonData);
 
     popularMovies = [ ...popularMovies, ...popularResponse.results ];
@@ -73,7 +70,7 @@ class MoviesProvider extends ChangeNotifier {
 
     if( moviesCast.containsKey(movieId)) return moviesCast[movieId]!;
 
-    final jsonData = await this._getJsonData('3/movie/$movieId/credits');
+    final jsonData = await _getJsonData('3/movie/$movieId/credits');
     final creditsResponse = CreditsResponse.fromJson( jsonData );
 
     moviesCast[movieId] = creditsResponse.cast;
@@ -98,15 +95,15 @@ class MoviesProvider extends ChangeNotifier {
 
     debouncer.value = '';
     debouncer.onValue = ( value ) async {
-      final results = await this.searchMovie( value );
-      this._suggestionStreamController.add( results );
+      final results = await searchMovie( value );
+      _suggestionStreamController.add( results );
     };
 
-    final timer = Timer.periodic(Duration(milliseconds: 300), ( _ ) {
+    final timer = Timer.periodic(const Duration(milliseconds: 300), ( _ ) {
       debouncer.value = searchTerm;
     });
 
-    Future.delayed(Duration( milliseconds: 301 )).then(( _ ) => timer.cancel());
+    Future.delayed(const Duration( milliseconds: 301 )).then(( _ ) => timer.cancel());
 
   }
 
