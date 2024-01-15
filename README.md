@@ -4,9 +4,9 @@ The Movie Explorer App is a Flutter application that allows you to explore and d
 
 ## Screenshots
 
-<img src="(https://github.com/pomarmcdrac/peliculas_flutter/assets/99893187/ba7eab0e-83d4-4ff2-939c-76fd094ff9e8" alt="Screenshot 1" width="300">
-<img src="(https://github.com/pomarmcdrac/peliculas_flutter/assets/99893187/644a48cd-7574-4742-a757-66975b0a95d4" alt="Screenshot 2" width="300">
-<img src="(https://github.com/pomarmcdrac/peliculas_flutter/assets/99893187/6f12765f-3250-4593-9274-ec66ccdf158f" alt="Screenshot 3" width="300">
+<img src="https://github.com/pomarmcdrac/peliculas_flutter/assets/99893187/ba7eab0e-83d4-4ff2-939c-76fd094ff9e8" alt="Screenshot 1" width="300">
+<img src="https://github.com/pomarmcdrac/peliculas_flutter/assets/99893187/644a48cd-7574-4742-a757-66975b0a95d4" alt="Screenshot 2" width="300">
+<img src="https://github.com/pomarmcdrac/peliculas_flutter/assets/99893187/6f12765f-3250-4593-9274-ec66ccdf158f" alt="Screenshot 3" width="300">
 
 ## Features
 
