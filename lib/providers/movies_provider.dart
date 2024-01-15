@@ -37,7 +37,7 @@ class MoviesProvider extends ChangeNotifier {
     final url = Uri.https( _baseUrl , endpoint , {
       'api_key': _apiKey,
       'language': _language,
-      'page':'$page',
+      'page':'$page'
       });
     final response = await http.get(url);
     return response.body;
@@ -45,7 +45,7 @@ class MoviesProvider extends ChangeNotifier {
 
   getOnDisplayMovies() async {
   
-    final jsonData = await _getJsonData('3/movie/popular');
+    final jsonData = await _getJsonData('3/movie/now_playing');
     final nowPlayingResponse = NowPlayingResponse.fromJson(jsonData);
 
     onDisplayMovies = nowPlayingResponse.results;

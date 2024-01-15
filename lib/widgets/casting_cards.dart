@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:peliculas/models/models.dart';
 import 'package:peliculas/providers/movies_provider.dart';
 import 'package:provider/provider.dart';
@@ -56,9 +57,9 @@ class _CastCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric( horizontal: 10 ),
+      margin: const EdgeInsets.symmetric( horizontal: 10, vertical: 10),
       width: 110,
-      height: 100,
+      height: 120,
       child: Column(
         children: [
           ClipRRect(
@@ -76,6 +77,10 @@ class _CastCard extends StatelessWidget {
 
           Text(
             actor.name,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 12
+            ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

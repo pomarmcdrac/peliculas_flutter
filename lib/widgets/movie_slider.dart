@@ -44,14 +44,21 @@ class _MovieSliderState extends State<MovieSlider> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 260,
+      height: 280,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if ( widget.title != null )
             Padding(
-              padding: const EdgeInsets.symmetric( horizontal: 20 ),
-              child: Text( widget.title! , style: const TextStyle( fontSize: 20, fontWeight: FontWeight.bold ),),
+              padding: const EdgeInsets.symmetric( horizontal: 20, vertical: 10 ),
+              child: Text( 
+                widget.title!, 
+                style: TextStyle( 
+                  fontSize: 20, 
+                  color: Colors.indigoAccent[200],
+                  fontWeight: FontWeight.bold 
+                ),
+              ),
             ),
 
           const SizedBox( height: 5, ),
@@ -89,7 +96,7 @@ class _MoviePoster extends StatelessWidget {
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'details', arguments: movie),
             child: Hero(
-              tag: movie.heroId!,
+              tag: movie.id,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: FadeInImage(
@@ -106,6 +113,9 @@ class _MoviePoster extends StatelessWidget {
 
           Text(
             movie.title,
+            style: TextStyle(
+              color: Colors.indigoAccent[100]
+            ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

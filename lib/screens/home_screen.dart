@@ -15,10 +15,17 @@ class HomeScreen extends StatelessWidget {
     final moviesProvider = Provider.of<MoviesProvider>(context);
 
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Películas en cines'),
-        elevation: 0,
+        title: Text(
+          'Películas en cines',
+          style: TextStyle(
+            color: Colors.indigo[100]
+          ),
+        ),
+        elevation: 3,
+        backgroundColor: Colors.indigo[900],
         actions: [
           IconButton(
             onPressed: () => showSearch(context: context, delegate: MovieSearchDelegate()), 

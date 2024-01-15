@@ -12,6 +12,7 @@ class DetailsScreen extends StatelessWidget {
     final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
 
     return Scaffold(
+      backgroundColor: Colors.black,
       body: CustomScrollView(
         slivers: [
           _CustomAppBar( movie ),
@@ -19,7 +20,10 @@ class DetailsScreen extends StatelessWidget {
             delegate: SliverChildListDelegate([
               _PosterAndTitle( movie ),
               _Overview( movie ),
-              CastingCards( movie.id )
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: CastingCards( movie.id ),
+              )
             ]),
           ), 
         ],
@@ -37,10 +41,19 @@ class _CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  SliverAppBar(
-      backgroundColor: Colors.cyan,
+      backgroundColor: Colors.indigoAccent[900],
       expandedHeight: 200,
       floating: false,
       pinned: true,
+      leading: CircleAvatar(
+        backgroundColor: Colors.black,
+        radius: 7,
+        child: IconButton(
+          padding: EdgeInsets.zero,
+          onPressed: () => Navigator.pop(context), 
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.indigo[100],)
+        ),
+      ),
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         titlePadding: const EdgeInsets.all(0),
@@ -74,7 +87,6 @@ class _PosterAndTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final TextTheme textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
 
     return Container(
@@ -83,7 +95,7 @@ class _PosterAndTitle extends StatelessWidget {
       child: Row(
         children: [
           Hero(
-            tag: movie.heroId!,
+            tag: movie.id,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
@@ -104,15 +116,37 @@ class _PosterAndTitle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 
-                Text( movie.title, style: textTheme.headlineSmall, overflow: TextOverflow.ellipsis, maxLines: 2 ),
+                Text( 
+                  movie.title, 
+                  style: const TextStyle(
+                    fontSize: 24,
+                    color: Colors.white
+                  ), 
+                  overflow: TextOverflow.ellipsis, 
+                  maxLines: 2 
+                ),
                 
-                Text( movie.originalTitle, style: textTheme.titleMedium, overflow: TextOverflow.ellipsis, maxLines: 2 ),
+                Text( 
+                  movie.originalTitle, 
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.indigoAccent[100]
+                  ),
+                  overflow: TextOverflow.ellipsis, 
+                  maxLines: 2 
+                ),
           
                 Row(
                   children: [
-                    const Icon( Icons.star, size: 15, color: Colors.blue),
+                    const Icon( Icons.star, size: 15, color: Colors.yellow),
                     const SizedBox( width: 5 ),
-                    Text('${movie.voteAverage}', style: textTheme.bodySmall )
+                    Text(
+                      '${movie.voteAverage}', 
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.white
+                      )
+                    )
                   ],
                 )
               ],
@@ -133,11 +167,14 @@ class _Overview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric( horizontal: 30, vertical: 10 ),
+      padding: const EdgeInsets.symmetric( horizontal: 30, vertical: 20 ),
       child: Text(
         movie.overview,
         textAlign: TextAlign.justify,
-        style: Theme.of(context).textTheme.titleMedium,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 16
+        ),
         ),
     );
   }

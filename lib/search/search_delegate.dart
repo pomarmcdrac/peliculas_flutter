@@ -55,8 +55,13 @@ class MovieSearchDelegate extends SearchDelegate{
 
   }
   Widget _emptyContainer() {
-    return const Center(
-      child: Icon( Icons.movie_creation_outlined, color: Colors.black38, size: 150,),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[800]
+      ),
+      child: Center(
+        child: Icon( Icons.movie_creation_outlined, color: Colors.indigoAccent[100], size: 150,),
+      ),
     );
   }
   Widget _getResults(BuildContext context) {
